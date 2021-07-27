@@ -1,8 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const SignUpSchema = require("./model/signUp");
-const DashboardSchema = require("./model/dashboard");
-const create = require("./functions/crudOps");
 const Signup = require("./routes/signup");
 const Dashboard = require("./routes/dashboard");
 

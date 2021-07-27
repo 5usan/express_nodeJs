@@ -22,7 +22,6 @@ const read = async (readSchema) => {
 
 const update = async (updateSchema, param, data) => {
   try {
-    // const id = req.params.id;
     const newUpdate = await updateSchema.findByIdAndUpdate(
       { _id: param },
       { $set: data }
@@ -35,7 +34,6 @@ const update = async (updateSchema, param, data) => {
 
 const destroy = async (deleteSchema, param) => {
   try {
-    // const id = req.params.id;
     console.log(param, "param");
     const newDelete = await deleteSchema.findByIdAndDelete({ _id: param });
     return newDelete;

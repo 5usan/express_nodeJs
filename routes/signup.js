@@ -3,14 +3,13 @@ const express = require("express");
 const SignUpSchema = require("../model/signUp");
 
 const router = express.Router();
-const crud = require("../functions/crudOps");
-// const read = require("../crudOps");
+const { create, read, update, destroy } = require("../functions/crudOps");
 
 router.post("/create", async (req, res) => {
   console.log("here");
   console.log("inside signup");
   try {
-    const createData = await crud.create(SignUpSchema, req.body);
+    const createData = await create(SignUpSchema, req.body);
 
     if (createData) {
       res.status(200).json({ msg: "Sign up successful" });
@@ -24,7 +23,7 @@ router.post("/create", async (req, res) => {
 
 router.get("/read", async (req, res) => {
   try {
-    const readData = await crud.read(SignUpSchema);
+    const readData = await read(SignUpSchema);
 
     if (readData) {
       res.status(200).json(readData);
@@ -38,9 +37,10 @@ router.get("/read", async (req, res) => {
 
 router.patch("/update/:id", async (req, res) => {
   try {
-    let data = { phoneNumber: "98123456789" };
+    let { phoneNumber, userName, name, address, password } = req.body;
+    let data = { phoneNumber: phoneNumber };
     let param = req.params.id;
-    const updateData = await crud.update(SignUpSchema, param, data);
+    const updateData = await update(SignUpSchema, param, data);
 
     if (updateData) {
       res.status(200).json(updateData);
@@ -56,7 +56,7 @@ router.get("/delete/:id", async (req, res) => {
   try {
     let param = req.params.id;
     console.log(param);
-    const deleteData = await crud.destroy(SignUpSchema, param);
+    const deleteData = await destroy(SignUpSchema, param);
 
     if (deleteData) {
       res.status(200).json(deleteData);
